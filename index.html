@@ -18,9 +18,9 @@
         }
 
         h1 {
-            margin-left: 550px;
             color: #333;
             margin-bottom: 30px;
+            text-align: center;
         }
 
         form {
@@ -32,12 +32,12 @@
             max-width: 1200px;
             box-sizing: border-box;
         }
-        img {
-         float: left;
-         margin-top: 15px;
-          
-        }
 
+        img {
+            float: left;
+            margin-top: 15px;
+            max-width: 100px; /* Ajuste o tamanho da imagem para telas menores */
+        }
 
         fieldset {
             margin-bottom: 50px;
@@ -62,7 +62,7 @@
             color: #555;
         }
 
-        input[type="password"], input[type="text"], input[type="submit"], select {
+        input[type="password"], input[type="text"], input[type="submit"], select, input[type="number"] {
             padding: 10px;
             width: 100%;
             margin-bottom: 15px;
@@ -120,41 +120,72 @@
         .col-colaborador {
             width: 20%;
         }
+
+        /* Media queries para responsividade */
+        @media screen and (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+
+            img {
+                float: none;
+                display: block;
+                margin: 0 auto;
+            }
+
+            h1 {
+                margin-left: 0;
+                text-align: center;
+            }
+
+            table, th, td {
+                font-size: 14px;
+            }
+
+            /* Diminuir o padding das tabelas para dispositivos móveis */
+            th, td {
+                padding: 5px;
+            }
+
+            input[type="text"], input[type="password"], input[type="number"] {
+                padding: 8px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            fieldset {
+                padding: 15px;
+            }
+
+            /* Ajustar fonte e espaçamento para telas pequenas */
+            h1 {
+                font-size: 24px;
+            }
+
+            input[type="submit"] {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
     </style>
 </head>
 <body>
-   
-
     <form id="requisicaoForm" action="https://formspree.io/f/xqakawdz" method="POST" onsubmit="return validarFormulario();">
         <img src="p4000.png" alt="Logo">
         <h1>Requisição de Material</h1>
 
         <!-- Checkbox de seleção única -->
         <fieldset>
-            
             <legend>Setor</legend>
             <div class="input-group">
-                <label>
-                    <input type="radio" name="categoria" value="Adm" required> Adm
-                </label>
-                <label>
-                    <input type="radio" name="categoria" value="tanque domestico"> Tanque Doméstico
-                </label>
-                <label>
-                    <input type="radio" name="categoria" value="Requalificação"> Requalificação
-                </label>
-                <label>
-                    <input type="radio" name="categoria" value="Acabamento"> Acabamento
-                </label>
-                <label>
-                    <input type="radio" name="categoria" value="Manutenção"> Manutenção
-                </label>
-                <label>
-                    <input type="radio" name="categoria" value="Qualidade"> Qualidade
-                </label>
-                <label>
-                    <input type="radio" name="categoria" value="p190"> p190
-                </label>
+                <label><input type="radio" name="categoria" value="Adm" required> Adm</label>
+                <label><input type="radio" name="categoria" value="tanque domestico"> Tanque Doméstico</label>
+                <label><input type="radio" name="categoria" value="Requalificação"> Requalificação</label>
+                <label><input type="radio" name="categoria" value="Acabamento"> Acabamento</label>
+                <label><input type="radio" name="categoria" value="Manutenção"> Manutenção</label>
+                <label><input type="radio" name="categoria" value="Qualidade"> Qualidade</label>
+                <label><input type="radio" name="categoria" value="p190"> p190</label>
             </div>
         </fieldset>
 
@@ -172,87 +203,12 @@
                 </thead>
                 <tbody>
                     <!-- Gerando 12 linhas da tabela -->
-                    <!-- Linhas de exemplo, altere conforme necessário -->
                     <tr>
                         <td><input type="text" name="id1"></td>
                         <td><input type="text" name="item1"></td>
                         <td><input type="number" name="quantidade1"></td>
                         <td><input type="text" name="colaborador1"></td>
                     </tr>
-                    <tr>
-                        <td><input type="text" name="id2"></td>
-                        <td><input type="text" name="item2"></td>
-                        <td><input type="number" name="quantidade2"></td>
-                        <td><input type="text" name="colaborador2"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id3"></td>
-                        <td><input type="text" name="item3"></td>
-                        <td><input type="number" name="quantidade3"></td>
-                        <td><input type="text" name="colaborador3"></td>
-                    </tr>
-
-                    <!-- Adicione mais linhas conforme necessário -->
                     <!-- Repita até 12 linhas -->
                 </tbody>
             </table>
@@ -278,19 +234,17 @@
         function validarFormulario() {
             const senhaSolicitante = document.getElementById("senha_solicitante").value;
 
-            // Quatro senhas fixas para validação
             const senha1 = "validador1";
             const senha2 = "validador2";
             const senha3 = "validador3";
             const senha4 = "validador4";
 
-            // Se a senha do solicitante não coincidir com nenhuma das senhas definidas, bloquear o envio
             if (senhaSolicitante !== senha1 && senhaSolicitante !== senha2 && senhaSolicitante !== senha3 && senhaSolicitante !== senha4) {
                 alert("Senha incorreta! Verifique e tente novamente.");
-                return false; // Impede o envio do formulário
+                return false;
             }
 
-            return true; // Permite o envio do formulário
+            return true;
         }
     </script>
 
