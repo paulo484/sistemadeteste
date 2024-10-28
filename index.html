@@ -5,315 +5,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Requisição de Material</title>
     <style>
-        /* Estilo do formulário */
+        /* Estilos Gerais */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
-
+        
         h1 {
-            color: #333;
-            margin-bottom: 30px;
             text-align: center;
+            color: #333;
         }
 
         form {
-            background-color: white;
-            border-radius: 10px;
-            padding: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 1200px;
-            box-sizing: border-box;
+            text-align: center;
+            margin-top: -250px;
         }
 
-        img {
-            float: left;
-            margin-top: 15px;
-            max-width: 100px; /* Ajuste o tamanho da imagem para telas menores */
+        /* Imagem do tanque no topo */
+        .tanque-imagem {
+            width: 100%;
+            max-width:600px;
+            margin: 0 auto 20px;
+            margin-top: 150px;
         }
 
         fieldset {
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            padding: 20px;
-        }
-
-        legend {
-            font-weight: bold;
-            color: #444;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
+            padding: 10px 20px;
         }
 
         label {
-            display: block;
-            margin-bottom: 5px;
             font-weight: bold;
             color: #555;
         }
 
-        input[type="password"], input[type="text"], input[type="submit"], select, input[type="number"] {
-            padding: 10px;
+        /* Responsividade */
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 0.9em;
+            }
+            input[type="submit"] {
+                width: 100%;
+            }
+        }
+
+        /* Estilo da Tabela */
+        table {
             width: 100%;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* Estilos dos campos de entrada e botões */
+        .input-group {
+            margin-top: 10px;
         }
 
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 10px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            transition: background-color 0.3s ease;
             font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
         }
 
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Limita a largura das colunas */
-        .col-id {
-            width: 10%;
-        }
-
-        .col-item {
-            width: 50%;
-        }
-
-        .col-quantidade {
-            width: 20%;
-        }
-
-        .col-colaborador {
-            width: 20%;
-        }
-
-        /* Media queries para responsividade */
-        @media screen and (max-width: 768px) {
-            form {
-                padding: 20px;
-            }
-
-            img {
-                float: none;
-                display: block;
-                margin: 0 auto;
-            }
-
-            h1 {
-                margin-left: 0;
-                text-align: center;
-            }
-
-            table, th, td {
-                font-size: 14px;
-            }
-
-            /* Diminuir o padding das tabelas para dispositivos móveis */
-            th, td {
-                padding: 5px;
-            }
-
-            input[type="text"], input[type="password"], input[type="number"] {
-                padding: 8px;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            fieldset {
-                padding: 15px;
-            }
-
-            /* Ajustar fonte e espaçamento para telas pequenas */
-            h1 {
-                font-size: 24px;
-            }
-
-            input[type="submit"] {
-                font-size: 14px;
-                padding: 8px;
-            }
-        }
-
     </style>
 </head>
 <body>
-    <form id="requisicaoForm" action="https://formspree.io/f/xqakawdz" method="POST" onsubmit="return validarFormulario();">
-        <img src="p4000.png" alt="Logo">
-        <h1>Requisição de Material</h1>
+ 
 
-        <!-- Checkbox de seleção única -->
-        <fieldset>
-            <legend>Setor</legend>
-            <div class="input-group">
-                <label><input type="radio" name="categoria" value="Adm" required> Adm</label>
-                <label><input type="radio" name="categoria" value="tanque domestico"> Tanque Doméstico</label>
-                <label><input type="radio" name="categoria" value="Requalificação"> Requalificação</label>
-                <label><input type="radio" name="categoria" value="Acabamento"> Acabamento</label>
-                <label><input type="radio" name="categoria" value="Manutenção"> Manutenção</label>
-                <label><input type="radio" name="categoria" value="Qualidade"> Qualidade</label>
-                <label><input type="radio" name="categoria" value="p190"> p190</label>
-            </div>
-        </fieldset>
+<form id="requisicaoForm" action="https://formspree.io/f/xqakawdz" method="POST" onsubmit="return validarFormulario();">
+    <!-- Imagem do tanque em destaque -->
+    <img src="p4000.png" alt="Tanque" class="tanque-imagem">
 
-        <!-- Tabela com 12 linhas -->
-        <fieldset>
-            <legend>Lista de Materiais</legend>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-id">ID</th>
-                        <th class="col-item">Item</th>
-                        <th class="col-quantidade">Quantidade</th>
-                        <th class="col-colaborador">Colaborador</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Gerando 12 linhas da tabela -->
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="id1"></td>
-                        <td><input type="text" name="item1"></td>
-                        <td><input type="number" name="quantidade1"></td>
-                        <td><input type="text" name="colaborador1"></td>
-                    </tr>
-                    
-                    <!-- Repita até 12 linhas -->
-                </tbody>
-            </table>
-        </fieldset>
+    <h1>Requisição de Material</h1>
 
-        <!-- Nome do Solicitante -->
-        <div class="input-group">
-            <label for="nome_solicitante">Nome do Solicitante:</label>
-            <input type="text" id="nome_solicitante" name="nome_solicitante" required>
+    <!-- Seção de Setores -->
+    <fieldset>
+        <legend>Seleção de Setor</legend>
+        <div>
+            <label><input type="radio" name="setor" value="Adm" required> Adm</label>
+            <label><input type="radio" name="setor" value="P190"> P190</label>
+            <label><input type="radio" name="setor" value="Tanques Domésticos"> Tanques Domésticos</label>
+            <label><input type="radio" name="setor" value="Qualidade"> Qualidade</label>
+            <label><input type="radio" name="setor" value="Manutenção"> Manutenção</label>
+            <label><input type="radio" name="setor" value="Requalificação"> Requalificação</label>
         </div>
+    </fieldset>
 
-        <!-- Senha do Solicitante -->
-        <div class="input-group">
-            <label for="senha_solicitante">Senha do Solicitante:</label>
-            <input type="password" id="senha_solicitante" name="senha_solicitante" required>
-        </div>
+    <!-- Tabela de Materiais -->
+    <fieldset>
+        <legend>Lista de Materiais</legend>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Item</th>
+                    <th>Quantidade</th>
+                    <th>Colaborador</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaMateriais"></tbody>
+        </table>
+    </fieldset>
 
-        <!-- Botão de Enviar -->
-        <input type="submit" value="Enviar">
-    </form>
+    <!-- Nome do Solicitante e Senha -->
+    <div class="input-group">
+        <label for="nome_solicitante">Nome do Solicitante:</label>
+        <input type="text" id="nome_solicitante" required>
+    </div>
+    <div class="input-group">
+        <label for="senha_solicitante">Senha do Solicitante:</label>
+        <input type="password" id="senha_solicitante" required>
+    </div>
 
-    <script>
-        function validarFormulario() {
-            const senhaSolicitante = document.getElementById("senha_solicitante").value;
+    <input type="submit" value="Enviar">
+</form>
 
-            const senha1 = "validador1";
-            const senha2 = "validador2";
-            const senha3 = "validador3";
-            const senha4 = "validador4";
+<script>
+    // Lista de itens com código e descrição
+    const listaItens = {
+        // consumiveis Produçao
+        "id001": "fluxo 108",
+        "id002": "Fluxo 105",
+        "id003": "Disco de corte 1mm",
+        "id004": "Dsico de corte 3mm",
+        "id005": "Escova Rotativa",
+        "id006": "Flap",
+        "id007": "Disco de Debaste",
+        "id008": "Arame 1.2",
+        "id009": "Arame 3.2 Lincol",
+        "id010": "Arme 3.2 Esab",
+        "id011": "Luva S/ rebaixo 1 polegada",
+        "id012": "Luva C/ Rebaixo 1 polegada",
+        "id013": "Luva 3/4",
+        
+     
 
-            if (senhaSolicitante !== senha1 && senhaSolicitante !== senha2 && senhaSolicitante !== senha3 && senhaSolicitante !== senha4) {
-                alert("Senha incorreta! Verifique e tente novamente.");
-                return false;
-            }
+        // Epis 
+        "id019": "Mascara com Respirador",
+        "id020": "Lente para mascara",
+        "id021": "Lente de vidro Mascara",
+        "id022": "Luva de Raspa",
+        "id023": "luva de Vaqueta",
+        "id024": "Lva 1008",
+        "id025": "Camisa P",
+        "id026": "Camisa M",
+        "id027": "Camisa G",
+        "id028": "Camisa GG",
+        "id029": "Calça P",
+        "id030": "Calça M",
+        "id031": "Calça G",
+        "id032": "Calça GG",
+        "id029": "Jaleco P",
+        "id029": "Jaleco M",
+        "id029": "Jaleco G",
+        "id029": "Jaleco GG",
+        
+    
+       
+       
 
-            return true;
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Adicione até 100 itens na lista com a mesma estrutura
+    };
+
+    // Gerar a tabela de 12 linhas para a entrada de materiais
+    function gerarTabela() {
+        const tabela = document.getElementById("tabelaMateriais");
+        let linhas = '';
+        for (let i = 1; i <= 12; i++) {
+            linhas += `
+                <tr>
+                    <td><input type="text" name="codigo${i}" id="codigo${i}" oninput="preencherItem(${i})"></td>
+                    <td><input type="text" name="item${i}" id="item${i}" oninput="preencherCodigo(${i})"></td>
+                    <td><input type="number" name="quantidade${i}" min="1"></td>
+                    <td><input type="text" name="colaborador${i}"></td>
+                </tr>
+            `;
         }
-    </script>
+        tabela.innerHTML = linhas;
+    }
+
+    // Preencher o campo Item ao inserir Código e vice-versa
+    function preencherItem(index) {
+        const codigo = document.getElementById(`codigo${index}`).value.trim().toLowerCase().replace(/\s+/g, "");
+        document.getElementById(`item${index}`).value = listaItens[codigo] || "";
+    }
+
+    function preencherCodigo(index) {
+        const item = document.getElementById(`item${index}`).value.trim().toLowerCase().replace(/\s+/g, "");
+        const codigo = Object.keys(listaItens).find(codigo => listaItens[codigo].toLowerCase().replace(/\s+/g, "") === item);
+        document.getElementById(`codigo${index}`).value = codigo || "";
+    }
+
+    gerarTabela();
+
+    // Senhas válidas e contador de solicitações
+    const senhasValidas = ["senha1", "senha2", "senha3", "senha4", "senha5", "senha6"];
+    const contadorSolicitacoes = JSON.parse(localStorage.getItem("contadorSolicitacoes")) || {};
+
+    // Validação do formulário
+    function validarFormulario() {
+        const senha = document.getElementById("senha_solicitante").value;
+        const nomeSolicitante = document.getElementById("nome_solicitante").value;
+        const dataHoje = new Date().toLocaleDateString();
+
+        // Checar senha válida
+        if (!senhasValidas.includes(senha)) {
+            alert("Senha incorreta.");
+            return false;
+        }
+
+        // Limite de 5 solicitações diárias
+        if (!contadorSolicitacoes[senha] || contadorSolicitacoes[senha].data !== dataHoje) {
+            contadorSolicitacoes[senha] = { data: dataHoje, contagem: 0 };
+        }
+
+        if (contadorSolicitacoes[senha].contagem >= 5) {
+            alert("Limite de 5 solicitações diárias atingido.");
+            return false;
+        }
+
+        contadorSolicitacoes[senha].contagem++;
+        localStorage.setItem("contadorSolicitacoes", JSON.stringify(contadorSolicitacoes));
+
+        return true;
+    }
+</script>
 
 </body>
 </html>
