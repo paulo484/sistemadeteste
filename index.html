@@ -145,6 +145,36 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        /* Estilos da tabela responsiva */
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap; /* Impede a quebra de linhas nas células */
+            }
+
+            th, td {
+                display: block;
+                text-align: right; /* Alinha o texto à direita */
+                border: none; /* Remove bordas para visual mais limpo */
+                position: relative; /* Para posicionar o conteúdo */
+                padding: 10px;
+            }
+
+            th {
+                text-align: left; /* Mantém o cabeçalho à esquerda */
+            }
+
+            td:before {
+                content: attr(data-label); /* Usa o atributo data-label para descrever o campo */
+                position: absolute;
+                left: 10px;
+                width: 50%; /* Ajusta a largura para dar espaço ao valor */
+                text-align: left; /* Alinha as labels à esquerda */
+                font-weight: bold; /* Torna as labels em negrito */
+            }
+        }
     </style>
 </head>
 <body>
@@ -235,10 +265,10 @@
         for (let i = 1; i <= 12; i++) {
             linhas += `
                 <tr>
-                    <td><input type="text" name="codigo${i}" id="codigo${i}" oninput="preencherItem(${i})"></td>
-                    <td><input type="text" name="item${i}" id="item${i}" oninput="preencherCodigo(${i})"></td>
-                    <td><input type="number" name="quantidade${i}" min="1"></td>
-                    <td><input type="text" name="colaborador${i}"></td>
+                    <td data-label="Código"><input type="text" name="codigo${i}" id="codigo${i}" oninput="preencherItem(${i})"></td>
+                    <td data-label="Item"><input type="text" name="item${i}" id="item${i}" oninput="preencherCodigo(${i})"></td>
+                    <td data-label="Quantidade"><input type="number" name="quantidade${i}" min="1"></td>
+                    <td data-label="Colaborador"><input type="text" name="colaborador${i}"></td>
                 </tr>
             `;
         }
