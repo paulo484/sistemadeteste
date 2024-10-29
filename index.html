@@ -64,46 +64,30 @@
             margin-bottom: 8px;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            form {
-                padding: 15px;
-                max-width: 100%;
-            }
-
-            .tanque-imagem {
-                max-width: 100%;
-            }
-
-            h1 {
-                font-size: 1.4em;
-            }
-
-            fieldset {
-                padding: 10px;
-            }
-
-            label {
-                display: block;
-            }
-
-            table, th, td {
-                font-size: 0.9em;
-            }
-        }
-
         /* Estilo da Tabela */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         th, td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
             border: 1px solid #ddd;
             box-sizing: border-box;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alterna as cores de fundo para linhas pares */
         }
 
         /* Estilos dos campos de entrada e botões */
@@ -146,24 +130,43 @@
             background-color: #45a049;
         }
 
-        /* Estilos da tabela responsiva */
+        /* Responsividade */
         @media (max-width: 768px) {
+            form {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            .tanque-imagem {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            fieldset {
+                padding: 10px;
+            }
+
             table {
-                display: block;
-                overflow-x: auto;
+                display: block; /* Torna a tabela um bloco */
+                overflow-x: auto; /* Adiciona rolagem horizontal */
                 white-space: nowrap; /* Impede a quebra de linhas nas células */
             }
 
             th, td {
-                display: block;
+                display: block; /* Muda as células para um layout de bloco */
                 text-align: right; /* Alinha o texto à direita */
                 border: none; /* Remove bordas para visual mais limpo */
                 position: relative; /* Para posicionar o conteúdo */
                 padding: 10px;
+                margin-bottom: 10px; /* Adiciona espaço entre as células */
             }
 
             th {
                 text-align: left; /* Mantém o cabeçalho à esquerda */
+                font-weight: bold; /* Cabeçalhos em negrito */
             }
 
             td:before {
@@ -266,56 +269,22 @@
             linhas += `
                 <tr>
                     <td data-label="Código"><input type="text" name="codigo${i}" id="codigo${i}" oninput="preencherItem(${i})"></td>
-                    <td data-label="Item"><input type="text" name="item${i}" id="item${i}" oninput="preencherCodigo(${i})"></td>
-                    <td data-label="Quantidade"><input type="number" name="quantidade${i}" min="1"></td>
-                    <td data-label="Colaborador"><input type="text" name="colaborador${i}"></td>
+                    <td data-label="Item"><input type="text" name="item${i}" id="item${i}"></td>
+                    <td data-label="Quantidade"><input type="number" name="quantidade${i}" id="quantidade${i}" min="0"></td>
+                    <td data-label="Colaborador"><input type="text" name="colaborador${i}" id="colaborador${i}"></td>
                 </tr>
             `;
         }
         tabela.innerHTML = linhas;
     }
 
-    function preencherItem(index) {
-        const codigo = document.getElementById(`codigo${index}`).value.trim().toLowerCase().replace(/\s+/g, "");
-        document.getElementById(`item${index}`).value = listaItens[codigo] || "";
+    function preencherItem(i) {
+        const codigo = document.getElementById(`codigo${i}`).value;
+        const itemInput = document.getElementById(`item${i}`);
+        itemInput.value = listaItens[codigo] || '';
     }
 
-    function preencherCodigo(index) {
-        const item = document.getElementById(`item${index}`).value.trim().toLowerCase().replace(/\s+/g, "");
-        const codigo = Object.keys(listaItens).find(codigo => listaItens[codigo].toLowerCase().replace(/\s+/g, "") === item);
-        document.getElementById(`codigo${index}`).value = codigo || "";
-    }
-
-    gerarTabela();
-
-    const senhasValidas = ["senha1", "senha2", "senha3", "senha4", "senha5", "senha6"];
-    const contadorSolicitacoes = JSON.parse(localStorage.getItem("contadorSolicitacoes")) || {};
-
-    function validarFormulario() {
-        const senha = document.getElementById("senha_solicitante").value;
-        const nomeSolicitante = document.getElementById("nome_solicitante").value;
-        const dataHoje = new Date().toLocaleDateString();
-
-        if (!senhasValidas.includes(senha)) {
-            alert("Senha incorreta.");
-            return false;
-        }
-
-        if (!contadorSolicitacoes[senha] || contadorSolicitacoes[senha].data !== dataHoje) {
-            contadorSolicitacoes[senha] = { data: dataHoje, contagem: 0 };
-        }
-
-        if (contadorSolicitacoes[senha].contagem >= 5) {
-            alert("Limite de 5 solicitações diárias atingido.");
-            return false;
-        }
-
-        contadorSolicitacoes[senha].contagem++;
-        localStorage.setItem("contadorSolicitacoes", JSON.stringify(contadorSolicitacoes));
-
-        return true;
-    }
+    window.onload = gerarTabela;
 </script>
-
 </body>
 </html>
