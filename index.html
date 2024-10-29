@@ -15,51 +15,80 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            box-sizing: border-box;
         }
-        
+
         h1 {
             text-align: center;
             color: #333;
+            font-size: 1.8em;
         }
 
         form {
             background: white;
-            padding: 20px;
+            padding: 10px;
             border-radius: 8px;
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-top: -250px;
+            margin-top: 20px;
+            box-sizing: border-box;
         }
 
         /* Imagem do tanque no topo */
         .tanque-imagem {
             width: 100%;
-            max-width:600px;
+            max-width: 600px;
+            height: auto;
             margin: 0 auto 20px;
-            margin-top: 150px;
+            display: block;
         }
 
         fieldset {
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            padding: 10px 20px;
+            padding: 15px 20px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #555;
         }
 
         label {
             font-weight: bold;
             color: #555;
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 8px;
         }
 
         /* Responsividade */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            .tanque-imagem {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            fieldset {
+                padding: 10px;
+            }
+
+            label {
+                display: block;
+            }
+
             table, th, td {
                 font-size: 0.9em;
-            }
-            input[type="submit"] {
-                width: 100%;
             }
         }
 
@@ -74,17 +103,35 @@
             padding: 8px;
             text-align: left;
             border: 1px solid #ddd;
+            box-sizing: border-box;
         }
 
         /* Estilos dos campos de entrada e botões */
         .input-group {
             margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
@@ -92,6 +139,7 @@
             font-size: 16px;
             width: 100%;
             margin-top: 20px;
+            box-sizing: border-box;
         }
 
         input[type="submit"]:hover {
@@ -100,7 +148,6 @@
     </style>
 </head>
 <body>
- 
 
 <form id="requisicaoForm" action="https://formspree.io/f/xqakawdz" method="POST" onsubmit="return validarFormulario();">
     <!-- Imagem do tanque em destaque -->
@@ -153,30 +200,25 @@
 <script>
     // Lista de itens com código e descrição
     const listaItens = {
-        // consumiveis Produçao
         "id001": "fluxo 108",
         "id002": "Fluxo 105",
         "id003": "Disco de corte 1mm",
-        "id004": "Dsico de corte 3mm",
+        "id004": "Disco de corte 3mm",
         "id005": "Escova Rotativa",
         "id006": "Flap",
-        "id007": "Disco de Debaste",
+        "id007": "Disco de Desbaste",
         "id008": "Arame 1.2",
         "id009": "Arame 3.2 Lincol",
-        "id010": "Arme 3.2 Esab",
+        "id010": "Arame 3.2 Esab",
         "id011": "Luva S/ rebaixo 1 polegada",
         "id012": "Luva C/ Rebaixo 1 polegada",
         "id013": "Luva 3/4",
-        
-     
-
-        // Epis 
         "id019": "Mascara com Respirador",
         "id020": "Lente para mascara",
         "id021": "Lente de vidro Mascara",
         "id022": "Luva de Raspa",
-        "id023": "luva de Vaqueta",
-        "id024": "Lva 1008",
+        "id023": "Luva de Vaqueta",
+        "id024": "Luva 1008",
         "id025": "Camisa P",
         "id026": "Camisa M",
         "id027": "Camisa G",
@@ -184,36 +226,9 @@
         "id029": "Calça P",
         "id030": "Calça M",
         "id031": "Calça G",
-        "id032": "Calça GG",
-        "id029": "Jaleco P",
-        "id029": "Jaleco M",
-        "id029": "Jaleco G",
-        "id029": "Jaleco GG",
-        
-    
-       
-       
-
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Adicione até 100 itens na lista com a mesma estrutura
+        "id032": "Calça GG"
     };
 
-    // Gerar a tabela de 12 linhas para a entrada de materiais
     function gerarTabela() {
         const tabela = document.getElementById("tabelaMateriais");
         let linhas = '';
@@ -230,7 +245,6 @@
         tabela.innerHTML = linhas;
     }
 
-    // Preencher o campo Item ao inserir Código e vice-versa
     function preencherItem(index) {
         const codigo = document.getElementById(`codigo${index}`).value.trim().toLowerCase().replace(/\s+/g, "");
         document.getElementById(`item${index}`).value = listaItens[codigo] || "";
@@ -244,23 +258,19 @@
 
     gerarTabela();
 
-    // Senhas válidas e contador de solicitações
     const senhasValidas = ["senha1", "senha2", "senha3", "senha4", "senha5", "senha6"];
     const contadorSolicitacoes = JSON.parse(localStorage.getItem("contadorSolicitacoes")) || {};
 
-    // Validação do formulário
     function validarFormulario() {
         const senha = document.getElementById("senha_solicitante").value;
         const nomeSolicitante = document.getElementById("nome_solicitante").value;
         const dataHoje = new Date().toLocaleDateString();
 
-        // Checar senha válida
         if (!senhasValidas.includes(senha)) {
             alert("Senha incorreta.");
             return false;
         }
 
-        // Limite de 5 solicitações diárias
         if (!contadorSolicitacoes[senha] || contadorSolicitacoes[senha].data !== dataHoje) {
             contadorSolicitacoes[senha] = { data: dataHoje, contagem: 0 };
         }
